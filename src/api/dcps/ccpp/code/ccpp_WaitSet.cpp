@@ -175,3 +175,15 @@ DDS::ReturnCode_t DDS::WaitSet::get_conditions (
     return result;
 }
 
+#if defined(WIN32)
+HANDLE
+#elif defined(_POSIX_C_SOURCE)
+int
+#endif
+DDS::WaitSet::get_os_waitable_handle(){
+    return gapi_waitSet_get_os_waitable_handle(_gapi_self);
+}
+
+os_uint64 DDS::WaitSet::clear_os_waitable_handle_events(){
+    return gapi_waitSet_clear_os_waitable_handle_events(_gapi_self);
+}

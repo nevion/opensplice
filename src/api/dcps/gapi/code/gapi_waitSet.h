@@ -42,6 +42,15 @@ C_STRUCT(_WaitSet) {
     c_voidp      conditions;
     c_long       length;
     c_iter       domains;
+
+#if defined(WIN32)
+    HANDLE os_waitable_handle;
+#elif defined(_POSIX_C_SOURCE)
+    int os_waitable_handle;
+    #if !defined(linux)
+    int os_waitable_handle_wpipe;
+    #endif
+#endif
 };
 
 _WaitSet

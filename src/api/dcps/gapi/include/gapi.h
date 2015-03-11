@@ -973,6 +973,16 @@ OS_API gapi_waitSet
 gapi_waitSet__alloc (
     void);
 
+OS_API
+#if defined(WIN32)
+HANDLE
+#elif defined(_POSIX_C_SOURCE)
+int
+#endif
+gapi_waitSet_get_os_waitable_handle(gapi_waitSet _this);
+
+OS_API os_uint64 gapi_waitSet_clear_os_waitable_handle_events(gapi_waitSet _this);
+
 /*
  * interface GuardCondition : Condition
  */

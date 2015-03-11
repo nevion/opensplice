@@ -52,6 +52,14 @@ namespace DDS
             ::DDS::ConditionSeq & attached_conditions
         ) THROW_ORB_EXCEPTIONS;
 
+        #if defined(WIN32)
+        HANDLE
+        #elif defined(_POSIX_C_SOURCE)
+        int
+        #endif
+        get_os_waitable_handle();
+
+        os_uint64 clear_os_waitable_handle_events();
     };
 }
 
