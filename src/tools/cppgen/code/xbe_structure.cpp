@@ -653,8 +653,8 @@ void be_structure::Generate (be_ClientHeader& source)
               << field->get_local_name() << "() { return this->" << field->get_local_name() << "_; }" << nl;
           // const set accessor
           os << tab << "void "
-              << field->get_local_name() << (is_sequency ? "(const " : "(") << relativeName
-              << (is_sequency ? "&" : "") << " _val_) { this->" << field->get_local_name() << "_ = _val_; }" << nl;
+              << field->get_local_name() << "(const " << relativeName
+              << "& _val_) { this->" << field->get_local_name() << "_ = _val_; }" << nl;
           source.Outdent();
           os << "#ifdef OSPL_DDS_CXX11" << nl;
           source.Indent();
