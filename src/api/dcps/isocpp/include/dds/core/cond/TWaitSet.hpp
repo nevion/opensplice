@@ -110,6 +110,22 @@ typename TWaitSet<DELEGATE>::ConditionSeq& TWaitSet<DELEGATE>::conditions(Condit
     return this->delegate()->conditions(conds);
 }
 
+template <typename DELEGATE>
+#if defined(WIN32)
+HANDLE
+#elif defined(_POSIX_C_SOURCE)
+int
+#endif
+TWaitSet<DELEGATE>::get_os_waitable_handle()
+{
+    return this->delegate()->get_os_waitable_handle();
+}
+
+template <typename DELEGATE>
+uint64_t TWaitSet<DELEGATE>::clear_os_waitable_handle_events(){
+    return this->delegate()->clear_os_waitable_handle_events();
+}
+
 }
 }
 }

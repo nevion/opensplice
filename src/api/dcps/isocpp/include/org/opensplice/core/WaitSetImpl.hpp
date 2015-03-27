@@ -151,6 +151,19 @@ public:
         return conds;
     }
 
+    #if defined(WIN32)
+    HANDLE
+    #elif defined(_POSIX_C_SOURCE)
+    int
+    #endif
+    get_os_waitable_handle(){
+        return waitset_.get_os_waitable_handle();
+    }
+
+    uint64_t clear_os_waitable_handle_events(){
+        return waitset_.clear_os_waitable_handle_events();
+    }
+
 private:
     DDS::WaitSet waitset_;
     std::map<DDS::Condition_ptr, dds::core::cond::Condition> cond_map_;

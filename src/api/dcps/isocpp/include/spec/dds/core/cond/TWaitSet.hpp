@@ -243,6 +243,15 @@ public:
      * @return the list of attached Conditions.
      */
     ConditionSeq& conditions(ConditionSeq& conds) const;
+
+    #if defined(WIN32)
+    HANDLE
+    #elif defined(_POSIX_C_SOURCE)
+    int
+    #endif
+    get_os_waitable_handle();
+
+    uint64_t clear_os_waitable_handle_events();
 };
 
 #endif /* OMG_TDDS_CORE_WAIT_SET_HPP_ */
